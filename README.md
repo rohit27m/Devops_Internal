@@ -1,4 +1,4 @@
-# DevOps Lab Exercise
+# DevOps Lab Exercise - Devops_Internal
 
 A simple Flask web application that displays a welcome message, containerized using Docker.
 
@@ -20,8 +20,8 @@ A simple Flask web application that displays a welcome message, containerized us
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-github-repository-url>
-cd <repository-name>
+git clone https://github.com/Rohit27m/Devops_Internal.git
+cd Devops_Internal
 ```
 
 ### 2. Modify the Code
