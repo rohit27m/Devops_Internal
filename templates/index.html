@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Lab Exercise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hello from {{ name }}!</h1>
+        <p>This is a simple web application for the DevOps Lab Exercise.</p>
+        
+        <div class="info-section">
+            <h2>Project Details</h2>
+            <p>This application demonstrates containerization with Docker and deployment using DevOps practices.</p>
+            <p>Host: {{ hostname }}</p>
+            <p>Python Version: {{ python_version }}</p>
+        </div>
+
+        <div class="time-display" id="current-time">
+            Current Server Time: {{ current_time }}
+        </div>
+
+        <div>
+            <a href="#" class="btn" id="refresh-btn">Refresh Time</a>
+            <a href="https://github.com/" target="_blank" class="btn">GitHub Repository</a>
+        </div>
+    </div>
+
+    <script>
+        // Update the time display every second
+        setInterval(function() {
+            const timeDisplay = document.getElementById('current-time');
+            const now = new Date();
+            timeDisplay.innerHTML = 'Current Browser Time: ' + now.toLocaleString();
+        }, 1000);
+
+        // Add refresh button functionality
+        document.getElementById('refresh-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            location.reload();
+        });
+
+        // Add some animation to the container on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            
+            setTimeout(function() {
+                container.style.transition = 'opacity 1s ease, transform 1s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
