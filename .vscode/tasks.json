@@ -20,14 +20,40 @@
         {
             "label": "Build Docker Image",
             "type": "shell",
-            "command": "docker build -t myapp .",
+            "command": "docker build -t weather-app .",
             "problemMatcher": []
         },
         {
             "label": "Run Docker Container",
             "type": "shell",
-            "command": "docker run -p 5000:5000 myapp",
+            "command": "docker run -p 5000:5000 --name weather-container -e OPENWEATHER_API_KEY=your_api_key_here -d weather-app",
             "problemMatcher": []
+        },
+        {
+            "label": "Build and Run Weather App",
+            "type": "shell",
+            "command": "docker build -t weather-app . && docker run -p 5000:5000 -e OPENWEATHER_API_KEY=your_api_key_here -d --name weather-container weather-app",
+            "problemMatcher": []
+        },
+        {
+            "label": "Stop and Remove Container",
+            "type": "shell",
+            "command": "docker stop weather-container && docker rm weather-container",
+            "problemMatcher": []
+        },
+        {
+            "label": "Push to Docker Hub",
+            "type": "shell",
+            "command": "docker tag weather-app ${input:dockerHubUsername}/weather-app:latest && docker push ${input:dockerHubUsername}/weather-app:latest",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "dockerHubUsername",
+            "description": "Docker Hub Username",
+            "default": "yourusername",
+            "type": "promptString"
         }
     ]
 }

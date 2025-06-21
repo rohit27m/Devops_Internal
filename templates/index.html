@@ -3,45 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Lab Exercise</title>
+    <title>Weather Application</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Hello from {{ name }}!</h1>
-        <p>This is a simple web application for the DevOps Lab Exercise.</p>
+        <h1>Weather App by {{ name }}</h1>
         
-        <div class="info-section">
-            <h2>Project Details</h2>
-            <p>This application demonstrates containerization with Docker and deployment using DevOps practices.</p>
-            <p>Host: {{ hostname }}</p>
-            <p>Python Version: {{ python_version }}</p>
+        <div class="search-section">
+            <form action="/" method="post">
+                <input type="text" name="city" id="city-input" placeholder="Enter city name..." required>
+                <button type="submit" class="btn search-btn"><i class="fas fa-search"></i> Search</button>
+            </form>
         </div>
-
+        
+        {% if weather_data %}
+        <div class="weather-section">
+            <h2>{{ weather_data.city }}, {{ weather_data.country }}</h2>
+            <div class="weather-display">
+                <div class="weather-icon">
+                    <img src="{{ weather_data.icon_url }}" alt="{{ weather_data.description }}">
+                </div>
+                <div class="weather-info">
+                    <div class="temperature">{{ weather_data.temperature }}°C</div>
+                    <div class="description">{{ weather_data.description }}</div>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="detail">
+                    <i class="fas fa-thermometer-half"></i>
+                    <span>Feels like: {{ weather_data.feels_like }}°C</span>
+                </div>
+                <div class="detail">
+                    <i class="fas fa-wind"></i>
+                    <span>Wind: {{ weather_data.wind_speed }} m/s</span>
+                </div>
+                <div class="detail">
+                    <i class="fas fa-tint"></i>
+                    <span>Humidity: {{ weather_data.humidity }}%</span>
+                </div>
+                <div class="detail">
+                    <i class="fas fa-compass"></i>
+                    <span>Pressure: {{ weather_data.pressure }} hPa</span>
+                </div>
+            </div>
+        </div>
+        {% elif error %}
+        <div class="error-section">
+            <p><i class="fas fa-exclamation-circle"></i> {{ error }}</p>
+        </div>
+        {% else %}
+        <div class="default-section">
+            <p>Enter a city name to get the current weather information</p>
+            <div class="default-icon">
+                <i class="fas fa-cloud-sun"></i>
+            </div>
+        </div>
+        {% endif %}
+        
         <div class="time-display" id="current-time">
-            Current Server Time: {{ current_time }}
-        </div>
-
-        <div>
-            <a href="#" class="btn" id="refresh-btn">Refresh Time</a>
-            <a href="https://github.com/" target="_blank" class="btn">GitHub Repository</a>
+            Last Updated: {{ current_time }}
+        </div>        <div class="footer">
+            <p>Powered by Weatherstack API</p>
+            <p>Containerized with Docker | Created by {{ name }}</p>
         </div>
     </div>
 
     <script>
-        // Update the time display every second
-        setInterval(function() {
-            const timeDisplay = document.getElementById('current-time');
-            const now = new Date();
-            timeDisplay.innerHTML = 'Current Browser Time: ' + now.toLocaleString();
-        }, 1000);
-
-        // Add refresh button functionality
-        document.getElementById('refresh-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            location.reload();
-        });
-
         // Add some animation to the container on load
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.container');
