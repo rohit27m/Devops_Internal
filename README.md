@@ -2,6 +2,10 @@
 
 A Flask-based weather application that allows users to get real-time weather information for any city. This project demonstrates DevOps principles including containerization with Docker, version control with Git, and continuous integration practices.
 
+## Documentation
+
+Detailed project documentation is available in the [documentation.pdf](./documentation.pdf) file in this repository. This documentation covers the project requirements, architecture, implementation details, and DevOps practices used.
+
 ## Project Structure
 
 ```
@@ -9,6 +13,7 @@ A Flask-based weather application that allows users to get real-time weather inf
 ├── app.py              # Main Flask application with weather API integration
 ├── requirements.txt    # Python dependencies
 ├── Dockerfile          # Docker containerization file
+├── documentation.pdf   # Detailed project documentation
 ├── static/             # Static assets
 │   └── style.css       # CSS styling for the weather app
 └── templates/          # HTML templates
