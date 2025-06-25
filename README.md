@@ -60,7 +60,7 @@ docker run -p 5001:5000 -d --name weatherapp-container weatherapp
 docker run -p 5001:5000 -e WEATHERSTACK_API_KEY=your_api_key_here -d --name weatherapp-container weatherapp
 ```
 
-Visit the application in your browser at http://localhost:5001
+Visit the application in your browser at http://localhost:5000
 
 ### 4. (Optional) Push to Docker Hub
 
